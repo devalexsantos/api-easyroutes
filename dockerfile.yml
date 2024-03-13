@@ -6,7 +6,7 @@ COPY . .
 
 RUN npm install
 
-RUN npx prisma migrate deploy --preview-feature
+RUN npx prisma migrate deploy
 
 EXPOSE 3000
 
