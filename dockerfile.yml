@@ -10,4 +10,4 @@ RUN npx prisma migrate deploy
 
 EXPOSE 3333
 
-CMD ["npm", "start"]
+CMD ["node", "server.js"]
