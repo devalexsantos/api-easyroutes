@@ -1,13 +1,15 @@
 FROM node:latest
 
-WORKDIR /app
+RUN mkdir -p /opt/app
 
-COPY . .
+WORKDIR /opt/app
+
+COPY src/package.json src/package-lock.json
 
 RUN npm install
 
-RUN npx prisma migrate deploy
+COPY src/ .
 
 EXPOSE 3333
 
-CMD ["npm", "start"]
+CMD [ "npm", "start"]
