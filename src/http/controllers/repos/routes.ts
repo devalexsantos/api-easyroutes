@@ -1,7 +1,6 @@
 import { FastifyInstance } from "fastify";
+import { createRepo } from "./create-repo";
 
 export async function reposRoutes(app: FastifyInstance) {
-  app.get('/repos', async () => {
-    return { hello: 'world' }
-  })
+  app.post('/repos', createRepo)
 }
