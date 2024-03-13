@@ -46,4 +46,18 @@ export class PrismaReposRepository {
       },
     })
   }
+
+  async listAll(owner: string) {
+    return await prisma.repo.findMany({
+      where: {
+        user: {
+          id: owner,
+        },
+      },
+      include: {
+        tags: true,
+        category: true,
+      },
+    })
+  }
 }
