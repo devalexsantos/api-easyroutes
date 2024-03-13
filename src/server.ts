@@ -1,6 +1,10 @@
-import { app } from "./app"
+import { app } from './app'
 
-app.listen({
+app
+  .listen({
     host: '0.0.0.0',
-    port: 3000
-}).then(()=> { console.log('HTTP server is running on port 3000')})
+    port: 3000,
+  })
+  .then(() => {
+    console.log('HTTP server is running on port 3000')
+  })
