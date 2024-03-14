@@ -10,6 +10,16 @@ interface CreateRepo {
   categoryId?: string
 }
 
+interface UpdateRepo {
+  id: string
+  name?: string
+  html_url?: string
+  description?: string
+  homepage?: string
+  tags: string[]
+  categoryId?: string
+}
+
 export class PrismaReposRepository {
   async create({
     name,
@@ -57,6 +67,40 @@ export class PrismaReposRepository {
       include: {
         tags: true,
         category: true,
+      },
+    })
+  }
+
+  async update({
+    id,
+    name,
+    html_url,
+    description,
+    homepage,
+    tags,
+    categoryId,
+  }: UpdateRepo) {
+    return await prisma.repo.update({
+      where: {
+        id,
+      },
+      data: {
+        name,
+        html_url,
+        description,
+        homepage,
+        tags: {
+          connect: tags.map((tag) => ({
+            id: tag,
+          })),
+        },
+        category: categoryId
+          ? {
+              connect: {
+                id: categoryId,
+              },
+            }
+          : undefined,
       },
     })
   }
