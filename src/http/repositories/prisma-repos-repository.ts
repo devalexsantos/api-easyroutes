@@ -104,4 +104,12 @@ export class PrismaReposRepository {
       },
     })
   }
+
+  async delete(id: string) {
+    return await prisma.repo.delete({
+      where: {
+        id,
+      },
+    })
+  }
 }
