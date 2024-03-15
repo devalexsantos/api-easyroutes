@@ -43,7 +43,7 @@ model Category {
 
 model Tag {
   id     String @id @default(uuid())
-  name   String @unique
+  name   String
   repos  Repo[]
   userId String
   user   User   @relation(fields: [userId], references: [id])
