@@ -15,6 +15,18 @@ export class PrismaUsersRepository {
     return users
   }
 
+  async update({ userId, premium }: { userId: string; premium: boolean }) {
+    const user = await prisma.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        premium,
+      },
+    })
+    return user
+  }
+
   async delete({ id }: { id: string }) {
     await prisma.user.delete({
       where: {
