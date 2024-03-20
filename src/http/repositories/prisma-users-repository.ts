@@ -2,6 +2,16 @@ import { prisma } from '../../lib/prisma'
 
 export class PrismaUsersRepository {
   async create({ id }: { id: string }) {
+    const userExists = await prisma.user.findUnique({
+      where: {
+        id,
+      },
+    })
+
+    if (userExists) {
+      return userExists
+    }
+
     const user = await prisma.user.create({
       data: {
         id,
@@ -33,5 +43,17 @@ export class PrismaUsersRepository {
         id,
       },
     })
+  }
+
+  async findUserById({ userId }: { userId: string }) {
+    const user = await prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+    })
+    if (user) {
+      return user
+    }
+    throw new Error('User not found')
   }
 }
