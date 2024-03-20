@@ -1,6 +1,21 @@
 import { prisma } from '../../lib/prisma'
 
+interface newUser {
+  data: {
+    id: string
+  }
+}
+
 export class PrismaUsersRepository {
+  async createWithClerk({ data }: newUser) {
+    const user = await prisma.user.create({
+      data: {
+        id: data.id,
+      },
+    })
+    return user
+  }
+
   async create({ id }: { id: string }) {
     const userExists = await prisma.user.findUnique({
       where: {
